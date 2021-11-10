@@ -17,4 +17,10 @@ public class testCommand {
     public void testCommandListJava() {
         Main.main(new String[]{"list_java","D:\\git\\i18ntools"});
     }
+    @Test void testCommandGetFileStr(){
+        Main.main(new String[]{"file_str","D:\\git\\i18ntools\\src\\main\\java\\com\\takaranoao\\i18nTools\\command\\CommandManager.java"});
+    }
+    @Test void testCommandSearchLang(){
+        Main.main(new String[]{"search_lang","D:\\nyaaplugins\\RPGItems-reloaded\\src","D:\\nyaaplugins\\RPGItems-reloaded\\lang.txt"});
+    }
 }

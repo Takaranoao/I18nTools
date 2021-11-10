@@ -11,6 +11,9 @@ public class I18n {
         resourceBundle = ResourceBundle.getBundle("lang.lang", defaultLocale);
         I18nResourceBundle = resourceBundle;
     }
+    public static String format(String key,Object... args){
+        return get(key).formatted(args);
+    }
     public static String get(String key){
         if(I18nResourceBundle == null)load();
         if(I18nResourceBundle == null)return "<CAN NOT LOAD I18N>";

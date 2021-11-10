@@ -1,8 +1,11 @@
 package com.takaranoao.i18nTools.command;
 
 import com.takaranoao.i18nTools.Main;
+import com.takaranoao.i18nTools.command.exception.CommandException;
 import com.takaranoao.i18nTools.command.impl.CommandFindJavaFiles;
+import com.takaranoao.i18nTools.command.impl.CommandGetJavaFileStr;
 import com.takaranoao.i18nTools.command.impl.CommandHelp;
+import com.takaranoao.i18nTools.command.impl.CommandSearchLang;
 import com.takaranoao.i18nTools.i18n.I18n;
 
 import java.util.*;
@@ -14,6 +17,8 @@ public class CommandManager {
     public static void init() {
         commandImpl.put("help", new CommandHelp());
         commandImpl.put("list_java", new CommandFindJavaFiles());
+        commandImpl.put("file_str",new CommandGetJavaFileStr());
+        commandImpl.put("search_lang",new CommandSearchLang());
     }
 
     public static void onCommand(String[] args) {
@@ -38,6 +43,10 @@ public class CommandManager {
     }
 
     private static void onCommand(Command commandImpl, String name, ArrayList<String> args) {
-        commandImpl.exec(name, new CommandSender(), args);
+        try {
+            commandImpl.exec(name, new CommandSender(), args);
+        } catch (CommandException e) {
+            e.printStackTrace();
+        }
     }
 }
