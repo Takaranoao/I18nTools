@@ -23,20 +23,7 @@ public class CommandSearchLang extends Command {
         List<String> result = new ArrayList<>();
         if (args.size() >= 2) {
             outputPath = FileSystems.getDefault().getPath(args.get(1));
-            if (Files.isDirectory(outputPath)) {
-                sender.sendMessage(I18n.get("command.search_lang.output.is_directory"));
-                return;
-            }
-            if (!Files.exists(outputPath)) {
-                try {
-                    Files.createFile(outputPath);
-                } catch (IOException e) {
-                    sender.sendMessage(I18n.format("command.search_lang.output.create_file_exception", outputPath.toString()));
-                    e.printStackTrace();
-                    return;
-                }
-            }
-            if (!Files.isWritable(outputPath)) {
+            if(!I18nFileUtils.createRWFile(outputPath)){
                 sender.sendMessage(I18n.format("command.search_lang.output.not_writable", outputPath.toString()));
                 return;
             }

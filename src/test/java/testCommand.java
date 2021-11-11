@@ -23,4 +23,12 @@ public class testCommand {
     @Test void testCommandSearchLang(){
         Main.main(new String[]{"search_lang","D:\\nyaaplugins\\RPGItems-reloaded\\src","D:\\nyaaplugins\\RPGItems-reloaded\\lang.txt"});
     }
+    //find_i18n_file
+    @Test void testCommandFindI18nFile(){
+        Main.main(new String[]{"find_i18n_file_yaml",
+                "D:\\nyaaplugins\\RPGItems-reloaded\\lang.txt",
+                "D:\\nyaaplugins\\RPGItems-reloaded\\src\\main\\resources\\lang\\en_US.yml",
+                "D:\\nyaaplugins\\RPGItems-reloaded\\lang_diff_en.txt"
+        });
+    }
 }
