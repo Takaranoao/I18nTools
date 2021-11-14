@@ -38,4 +38,11 @@ public class testCommand {
                 "D:\\nyaaplugins\\RPGItems-reloaded\\sort_en.txt"
         });
     }
+    //diff_key_i18n_yaml
+    @Test void testCommandDiffKey(){
+        Main.main(new String[]{"diff_key_i18n_yaml",
+                "D:\\nyaaplugins\\RPGItems-reloaded\\src\\main\\resources\\lang\\en_US.yml",
+                "D:\\nyaaplugins\\RPGItems-reloaded\\src\\main\\resources\\lang\\zh_CN.yml"
+        });
+    }
 }

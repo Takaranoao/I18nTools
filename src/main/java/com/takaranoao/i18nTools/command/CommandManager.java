@@ -18,6 +18,8 @@ public class CommandManager {
         commandImpl.put("search_lang",new CommandSearchLang());
         commandImpl.put("find_i18n_file_yaml",new CommandFindI18nFileYaml());
         commandImpl.put("sort_yaml",new CommandSortYaml());
+        commandImpl.put("diff_key_i18n_yaml",new CommandDiffKeysYaml());
+
     }
 
     public static void onCommand(String[] args) {
