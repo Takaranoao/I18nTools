@@ -3,7 +3,6 @@ package com.takaranoao.i18nTools.command.impl;
 import com.takaranoao.i18nTools.command.Command;
 import com.takaranoao.i18nTools.command.CommandSender;
 import com.takaranoao.i18nTools.command.exception.BadCommandException;
-import com.takaranoao.i18nTools.i18n.I18n;
 import com.takaranoao.i18nTools.utils.I18nFileUtils;
 
 import java.nio.file.FileSystems;

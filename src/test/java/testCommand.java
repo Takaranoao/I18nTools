@@ -31,4 +31,11 @@ public class testCommand {
                 "D:\\nyaaplugins\\RPGItems-reloaded\\lang_diff_en.txt"
         });
     }
+    //sort_yaml
+    @Test void testCommandSortYamlFile(){
+        Main.main(new String[]{"sort_yaml",
+                "D:\\nyaaplugins\\RPGItems-reloaded\\src\\main\\resources\\lang\\en_US.yml",
+                "D:\\nyaaplugins\\RPGItems-reloaded\\sort_en.txt"
+        });
+    }
 }

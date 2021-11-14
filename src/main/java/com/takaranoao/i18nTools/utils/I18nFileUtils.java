@@ -8,28 +8,68 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.security.Key;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class I18nFileUtils {
-    public static List<String> getI18nKeyYaml(Map<?,?> obj){
+    public static List<String> getI18nKeyYaml(Map<?, ?> obj) {
         return yamlObjectToMap(obj).keySet().stream().toList();
     }
-    public static Map<String,String> yamlObjectToMap(Map<?,?> obj){
-        Map<String,String> result = new LinkedHashMap<>();
+
+    public static Map<String, String> yamlObjectToMap(Map<?, ?> obj) {
+        Map<String, String> result = new LinkedHashMap<>();
         obj.forEach(
-                (k,v)->{
-                    if(!(k instanceof String))return;
-                    if(v instanceof String)result.put((String) k, (String) v);
-                    if(v instanceof Map){
-                        yamlObjectToMap((Map<?, ?>) v).forEach((k1,v1)-> result.put(k+"."+k1,v1));
+                (k, v) -> {
+                    if (!(k instanceof String)) return;
+                    if (v instanceof String) result.put((String) k, (String) v);
+                    if (v instanceof Map) {
+                        yamlObjectToMap((Map<?, ?>) v).forEach((k1, v1) -> result.put(k + "." + k1, v1));
                     }
                 }
         );
         return result;
     }
+
+    public static Map<String, Object> i18nMapToYamlObject(Map<String, String> i18nMap) {
+        Map<String, Object> result = new LinkedHashMap<>();
+        i18nMap.forEach((k,v)-> addToI18nYaml(result, k, v));
+        return result;
+    }
+
+    public static Map<String, Object> addToI18nYaml(Map<String, Object> map, String key, String value) {
+        List<String> keys = new ArrayList<>(Arrays.asList(key.split("\\.")));
+        Map<String, Object> subMap = map;
+        StringBuilder key0_ = null;
+        while (keys.size() > 1) {
+            String subKey = keys.remove(0);
+            if (key0_ == null) {
+                key0_ = new StringBuilder(subKey);
+            } else {
+                key0_.append(".").append(subKey);
+            }
+
+            if (!subMap.containsKey(subKey)) {
+                subMap.put(subKey, new LinkedHashMap<String, Object>());
+            }
+            Object obj = subMap.get(subKey);
+            if (obj instanceof Map) {
+                subMap = (Map<String, Object>) obj;
+            } else {
+                map.put(key0_.toString(),obj);
+                Map<String, Object> map0_ = new LinkedHashMap<>();
+                subMap.put(subKey,map0_);
+                subMap = map0_;
+            }
+        }
+        String subKey = keys.remove(0);
+        subMap.put(subKey, value);
+        return map;
+    }
+
+
     public static boolean notRWFile(Path path) {
         if (Files.isDirectory(path)) {
             return true;
@@ -37,9 +77,9 @@ public class I18nFileUtils {
         return !Files.isWritable(path) || !Files.isReadable(path);
     }
 
-    public static boolean createRWFile(Path path) {
+    public static boolean notCreateRWFile(Path path) {
         if (Files.isDirectory(path)) {
-            return false;
+            return true;
         }
         if (!Files.exists(path)) {
             try {
@@ -47,10 +87,10 @@ public class I18nFileUtils {
             } catch (IOException e) {
 
                 e.printStackTrace();
-                return false;
+                return true;
             }
         }
-        return Files.isWritable(path) && Files.isReadable(path);
+        return !Files.isWritable(path) || !Files.isReadable(path);
     }
 
     public static List<Path> listJavaFile(Path path) {
