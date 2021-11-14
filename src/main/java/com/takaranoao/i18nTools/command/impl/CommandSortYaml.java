@@ -35,7 +35,7 @@ public class CommandSortYaml extends Command {
         Map<String, String> i18nMap = I18nFileUtils.yamlObjectToMap(i18nYml);
         i18nMap = new TreeMap<>(i18nMap);
         try {
-            Files.writeString(outFile, yaml.dumpAsMap(I18nFileUtils.i18nMapToYamlObject(i18nMap)), StandardOpenOption.CREATE_NEW);
+            Files.writeString(outFile, yaml.dumpAsMap(I18nFileUtils.i18nMapToYamlObject(i18nMap)), StandardOpenOption.CREATE,StandardOpenOption.WRITE);
         } catch (IOException e) {
             e.printStackTrace();
         }
