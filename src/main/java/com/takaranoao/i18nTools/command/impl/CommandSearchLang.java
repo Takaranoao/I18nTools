@@ -23,7 +23,7 @@ public class CommandSearchLang extends Command {
         List<String> result = new ArrayList<>();
         if (args.size() >= 2) {
             outputPath = FileSystems.getDefault().getPath(args.get(1));
-            if(I18nFileUtils.notCreateRWFile(outputPath)){
+            if(I18nFileUtils.canNotCreateRWFile(outputPath)){
                 sender.sendMessage(I18n.format("command.search_lang.output.not_writable", outputPath.toString()));
                 return;
             }

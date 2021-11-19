@@ -32,9 +32,37 @@ public class I18nFileUtils {
         return result;
     }
 
+    public static Map<String, Object> i18nMapToYamlObjectRaw(Map<?, ?> i18nMap) {
+        Map<Object, Object> mapIn = new LinkedHashMap<>(i18nMap);
+        Map<String, String> stringMap = new LinkedHashMap<>();
+        Iterator<? extends Map.Entry<?, ?>> iterator = mapIn.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<?, ?> next = iterator.next();
+            if (next.getKey() instanceof String && next.getValue() instanceof String) {
+                stringMap.put((String) next.getKey(), (String) next.getValue());
+                iterator.remove();
+            }
+        }
+
+        for (Map.Entry<String, Object> entry : i18nMapToYamlObject(stringMap).entrySet()) {
+            try {
+                mapIn.put(entry.getKey(), entry.getValue());
+            } catch (Exception ignored) {
+            }
+        }
+
+        Map<String, Object> result = new LinkedHashMap<>();
+        mapIn.forEach((k, v) -> {
+            if (k instanceof String) {
+                result.put((String) k, v);
+            }
+        });
+        return result;
+    }
+
     public static Map<String, Object> i18nMapToYamlObject(Map<String, String> i18nMap) {
         Map<String, Object> result = new LinkedHashMap<>();
-        i18nMap.forEach((k,v)-> addToI18nYaml(result, k, v));
+        i18nMap.forEach((k, v) -> addToI18nYaml(result, k, v));
         return result;
     }
 
@@ -57,9 +85,9 @@ public class I18nFileUtils {
             if (obj instanceof Map) {
                 subMap = (Map<String, Object>) obj;
             } else {
-                map.put(key0_.toString(),obj);
+                map.put(key0_.toString(), obj);
                 Map<String, Object> map0_ = new LinkedHashMap<>();
-                subMap.put(subKey,map0_);
+                subMap.put(subKey, map0_);
                 subMap = map0_;
             }
         }
@@ -76,7 +104,7 @@ public class I18nFileUtils {
         return !Files.isWritable(path) || !Files.isReadable(path);
     }
 
-    public static boolean notCreateRWFile(Path path) {
+    public static boolean canNotCreateRWFile(Path path) {
         if (Files.isDirectory(path)) {
             return true;
         }

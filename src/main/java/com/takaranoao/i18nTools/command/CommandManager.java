@@ -19,7 +19,11 @@ public class CommandManager {
         commandImpl.put("find_i18n_file_yaml",new CommandFindI18nFileYaml());
         commandImpl.put("sort_yaml",new CommandSortYaml());
         commandImpl.put("diff_key_i18n_yaml",new CommandDiffKeysYaml());
-
+        commandImpl.put("merge_i18n_yaml",new CommandMergeYaml());
+        commandImpl.put("i18n_yaml2json",new CommandI18nToJson(false));
+        commandImpl.put("i18n_yaml2json_deep",new CommandI18nToJson(true));
+        commandImpl.put("i18n_json2yaml",new CommandI18nJsonToYaml(false));
+        commandImpl.put("i18n_json2yaml_deep",new CommandI18nJsonToYaml(true));
     }
 
     public static void onCommand(String[] args) {

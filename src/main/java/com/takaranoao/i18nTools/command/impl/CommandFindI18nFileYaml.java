@@ -29,7 +29,7 @@ public class CommandFindI18nFileYaml extends Command {
         if (I18nFileUtils.notRWFile(i18nFile)) {
             return;
         }
-        if (I18nFileUtils.notCreateRWFile(outFile)) {
+        if (I18nFileUtils.canNotCreateRWFile(outFile)) {
             return;
         }
         List<String> inStr;
