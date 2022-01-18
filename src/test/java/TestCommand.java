@@ -2,7 +2,7 @@ import com.takaranoao.i18nTools.Main;
 import org.junit.jupiter.api.Test;
 
 
-public class testCommand {
+public class TestCommand {
 
     @Test
     public void testCommandHelp() {
@@ -28,7 +28,7 @@ public class testCommand {
         Main.main(new String[]{"find_i18n_file_yaml",
                 "D:\\nyaaplugins\\RPGItems-reloaded\\lang.txt",
                 "D:\\nyaaplugins\\RPGItems-reloaded\\src\\main\\resources\\lang\\en_US.yml",
-                "D:\\nyaaplugins\\RPGItems-reloaded\\lang_diff_en2.txt"
+                "D:\\nyaaplugins\\RPGItems-reloaded\\lang_diff_en.txt"
         });
     }
     //sort_yaml
@@ -49,9 +49,9 @@ public class testCommand {
     //merge_i18n_yaml
     @Test void testCommandMergeYaml(){
         Main.main(new String[]{"merge_i18n_yaml",
-                "D:\\nyaaplugins\\RPGItems-reloaded\\src\\main\\resources\\lang\\en_US.yml",
                 "D:\\nyaaplugins\\RPGItems-reloaded\\src\\main\\resources\\lang\\zh_CN.yml",
-                "D:\\nyaaplugins\\RPGItems-reloaded\\src\\main\\resources\\lang\\en_US_merge.yml"
+                "D:\\nyaaplugins\\RPGItems-reloaded\\src\\main\\resources\\lang\\en_US_2.yml",
+                "D:\\nyaaplugins\\RPGItems-reloaded\\src\\main\\resources\\lang\\zh_CN_merge.yml"
         });
     }
     //i18n_yaml2JsonProperties

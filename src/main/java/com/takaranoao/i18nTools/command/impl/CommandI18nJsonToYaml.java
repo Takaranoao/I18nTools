@@ -26,7 +26,6 @@ public class CommandI18nJsonToYaml extends Command {
     public CommandI18nJsonToYaml(boolean deep) {
         this.deep = deep;
     }
-
     @Override
     public void exec(String name, CommandSender sender, ArrayList<String> args) throws CommandException {
         needArgs(args, 2);
